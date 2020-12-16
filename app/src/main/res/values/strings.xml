@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Afridi Gaming</string>
+    <string name="have_ac">New User? <b>Sign Up</b></string>
+    <string name="contractUs">Any Problem? <b>Contact Us</b> </string>
+    <string name="title_activity_user_home">MainActivity</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="on_going">On Going</string>
+    <string name="play">Play</string>
+    <string name="result">Result</string>
+    <string name="me">Me</string>
+</resources>
