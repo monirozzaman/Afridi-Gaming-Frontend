@@ -5,9 +5,12 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.itvillage.afridigaming.ui.me.MeFragment;
+import com.itvillage.afridigaming.ui.ongoing.HomeFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -15,7 +18,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class UserHomeActivity extends AppCompatActivity {
 
-    private CardView free_fire_but;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +33,6 @@ public class UserHomeActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-//        free_fire_but = findViewById(R.id.free_fire_but);
-//
-//        free_fire_but.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(),"dffg",Toast.LENGTH_LONG);
-//            }
-//        });
     }
 
 }
