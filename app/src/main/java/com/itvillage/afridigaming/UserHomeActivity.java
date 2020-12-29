@@ -1,10 +1,13 @@
 package com.itvillage.afridigaming;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -12,6 +15,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class UserHomeActivity extends AppCompatActivity {
 
+    private CardView free_fire_but;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +29,15 @@ public class UserHomeActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+//        free_fire_but = findViewById(R.id.free_fire_but);
+//
+//        free_fire_but.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(),"dffg",Toast.LENGTH_LONG);
+//            }
+//        });
     }
 
 }
