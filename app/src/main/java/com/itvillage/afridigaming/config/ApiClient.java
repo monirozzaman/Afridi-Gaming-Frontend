@@ -28,6 +28,7 @@ public class ApiClient {
     private static int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
     private static String BASE_URL = "http://10.0.2.2:8088";
+    //private static String BASE_URL = "http://10.0.2.15:8088";
     //private static String BASE_URL = "http://192.168.0.100:8088";
 
     public static Retrofit getClient(Context context) {

@@ -6,18 +6,27 @@ package com.itvillage.afridigaming.dto.response;
 
 public class LoginResponse {
 
-    private String token;
+    private String tokenType;
+    private String accessToken;
 
-
-    public LoginResponse(String token) {
-        this.token = token;
+    public String getTokenType() {
+        return tokenType;
     }
 
-    public String getToken() {
-        return token;
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public LoginResponse(String tokenType, String accessToken) {
+        this.tokenType = tokenType;
+        this.accessToken = accessToken;
     }
 }

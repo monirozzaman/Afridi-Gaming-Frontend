@@ -74,15 +74,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("CheckResult")
     private void login(String username, String password) {
 
         LoginService loginService = new LoginService(this);
+//        loginService.login(username,password).subscribe( res ->{
+//             System.out.println(res);
+//        });
         Observable<LoginResponse> responseObservable = loginService.login(username, password);
 
 
         responseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(loginIn -> {
+
+                    Log.e("Access Token",String.valueOf(loginIn.getAccessToken()));
                     onLoginSuccess(loginIn);
 
                 }, throwable -> {
@@ -96,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
     private void onLoginSuccess(LoginResponse loginResponse) {
 
 
-        perfUtil.saveAccessToken(loginResponse.getToken());
+        perfUtil.saveAccessToken(loginResponse.getAccessToken());
 
         /*JWT parsedJWT = new JWT(loginResponse.getToken());
         Claim subscriptionMetaData = parsedJWT.getClaim("scopes");
