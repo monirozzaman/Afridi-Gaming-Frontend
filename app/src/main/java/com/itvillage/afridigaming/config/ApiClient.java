@@ -75,13 +75,13 @@ public class ApiClient {
             List<Cookie> cookieList = cookieJar.loadForRequest(original.url());
             Log.e("ApiClient", cookieList.toString());
 
-            for (Cookie cookie : cookieList) {
+          /*  for (Cookie cookie : cookieList) {
                 if ("XSRF-TOKEN".equals(cookie.name())) {
 
                     requestBuilder.addHeader("X-XSRF-TOKEN", cookie.value());
                     break;
                 }
-            }
+            }*/
 
             ApplicationSharedPreferencesUtil perfUtil = new ApplicationSharedPreferencesUtil(context);
 
