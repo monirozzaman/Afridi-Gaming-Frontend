@@ -226,6 +226,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/moneyBag"
                 android:layout_width="match_parent"
                 android:padding="5dp"
                 android:layout_height="35dp">

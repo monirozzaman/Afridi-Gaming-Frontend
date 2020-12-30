@@ -16,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView contact_us,sign_up,forget_password;
     private Button sign_in_but;
     private TextInputEditText emailEditText,password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

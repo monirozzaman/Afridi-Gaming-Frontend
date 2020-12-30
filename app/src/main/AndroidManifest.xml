@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AfridiGaming"
         android:usesCleartextTraffic="true">
-        <activity android:name=".GamesShowUserViewActivity"></activity>
+        <activity android:name=".UserBalanceActivity"></activity>
+        <activity android:name=".GamesShowUserViewActivity" />
         <activity android:name=".MoneyApprovalActivity" />
         <activity android:name=".GameListActivity" />
         <activity android:name=".AdminHomeActivity" />
