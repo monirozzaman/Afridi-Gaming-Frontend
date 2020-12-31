@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.textfield.TextInputEditText;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.services.LoginService;
@@ -101,16 +103,28 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onLoginSuccess(LoginResponse loginResponse) {
 
+        Log.e("Access Token",String.valueOf(loginResponse.getAccessToken()));
 
-        perfUtil.saveAccessToken(loginResponse.getAccessToken());
+        perfUtil.saveAccessToken(String.valueOf(loginResponse.getAccessToken()));
 
-        /*JWT parsedJWT = new JWT(loginResponse.getToken());
+        JWT parsedJWT = new JWT(String.valueOf(loginResponse.getAccessToken()));
         Claim subscriptionMetaData = parsedJWT.getClaim("scopes");
         String parsedValue = subscriptionMetaData.asString();
-*/
 
-        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
-        startActivity(intent);
+        Log.e("Access Token",parsedValue);
+
+        if (parsedValue.equals("SUPER_ADMIN")){
+            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+            startActivity(intent);
+        }
+
+        else if (parsedValue.equals("USER")){
+            Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+            startActivity(intent);
+        }
+
+
+
 
         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_LONG).show();
         dialog.dismiss();
