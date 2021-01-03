@@ -16,6 +16,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.itvillage.afridigaming.LoginActivity;
+import com.itvillage.afridigaming.PasswordChange;
 import com.itvillage.afridigaming.R;
 import com.itvillage.afridigaming.UserBalanceActivity;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
@@ -42,6 +44,8 @@ public class MeFragment extends Fragment {
         view = inflater.inflate(R.layout.me_fragment, container, false);
         ConstraintLayout myProfile = view.findViewById(R.id.myProfile);
         ConstraintLayout moneyBag = view.findViewById(R.id.moneyBag);
+        ConstraintLayout logoutUser = view.findViewById(R.id.logoutUser);
+        ConstraintLayout changePassword = view.findViewById(R.id.changePassword);
 
         userProfileName = view.findViewById(R.id.userProfileName);
         availableBalance = view.findViewById(R.id.availableBalance);
@@ -55,11 +59,24 @@ public class MeFragment extends Fragment {
                 startActivity(new Intent(view.getContext(), UserBalanceActivity.class));
             }
         });
+        logoutUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(view.getContext(), LoginActivity.class));
+            }
+        });
 
         myProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(view.getContext(), myProfileAdding.class));
+            }
+        });
+
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(view.getContext(), PasswordChange.class));
             }
         });
         return view;
@@ -75,8 +92,6 @@ public class MeFragment extends Fragment {
 
     @SuppressLint("CheckResult")
     private void getUserProfile() {
-
-
 
         GetUserService getUserService = new GetUserService(view.getContext().getApplicationContext());
         Observable<UserCreateProfileResponse> userCreateProfileResponseObservable =

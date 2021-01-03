@@ -80,9 +80,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(String username, String password) {
 
         LoginService loginService = new LoginService(this);
-//        loginService.login(username,password).subscribe( res ->{
-//             System.out.println(res);
-//        });
+
         Observable<LoginResponse> responseObservable = loginService.login(username, password);
 
 

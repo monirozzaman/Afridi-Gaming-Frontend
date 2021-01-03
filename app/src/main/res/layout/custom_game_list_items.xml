@@ -73,13 +73,14 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalPrizeText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:textSize="12dp"
                     android:text="20"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -102,6 +103,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalKillText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -130,6 +132,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalFeeText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -152,18 +155,19 @@
                 <TextView
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="12dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
+                    android:gravity="center"
                     android:padding="2dp"
-                    android:text="Total Prize"
+                    android:text="Type"
                     android:textAllCaps="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
+                    android:textSize="12dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/typeText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -183,15 +187,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:textSize="12dp"
                     android:padding="2dp"
-                    android:text="Per Kill"
+                    android:text="Version"
                     android:textAllCaps="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
+                    android:textSize="12dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/versionText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -211,15 +216,16 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:gravity="center"
-                    android:textSize="12dp"
                     android:padding="2dp"
-                    android:text="Entry Fee"
+                    android:text="Map"
                     android:textAllCaps="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
+                    android:textSize="12dp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/mapText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -239,6 +245,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/prizeDetailsShowBut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -246,6 +253,7 @@
                 android:text="Total Prize Details" />
 
             <Button
+                android:id="@+id/joinNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Join Now" />

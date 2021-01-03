@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AfridiGaming"
         android:usesCleartextTraffic="true">
-        <activity android:name=".myProfileAdding"></activity>
+        <activity android:name=".JoinNowUserActivity"></activity>
+        <activity android:name=".AddNewGameAdminActivity" />
+        <activity android:name=".PasswordChange" />
+        <activity android:name=".myProfileAdding" />
         <activity android:name=".UserBalanceActivity" />
         <activity android:name=".GamesShowUserViewActivity" />
         <activity android:name=".MoneyApprovalActivity" />
