@@ -14,12 +14,13 @@
         android:background="@color/base_color"
         tools:ignore="MissingConstraints">
 
-        <ImageView
-            android:id="@+id/btnBackPares"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/left_arrow" />
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:padding="10dp"
+      android:gravity="center"
+      android:textSize="20dp"
+      android:text="Update Profile"/>
     </LinearLayout>
 
     <LinearLayout
@@ -107,7 +108,7 @@
             android:layout_marginRight="10dp"
             android:fontFamily="sans-serif"
             android:padding="15dp"
-            android:text="Create Profile"
+            android:text="Update Profile"
             android:textAllCaps="false"
             android:textColor="@color/text_color"
             android:textStyle="bold"

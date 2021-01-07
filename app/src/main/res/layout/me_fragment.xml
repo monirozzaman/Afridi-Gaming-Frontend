@@ -88,39 +88,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="serif-monospace"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="00"
-                        android:textColor="@color/black"
-                        android:textSize="30dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="serif-monospace"
-                        android:gravity="center"
-                        android:padding="4dp"
-                        android:text="Match Played"
-                        android:textColor="@color/black" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="100dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
+                        android:id="@+id/totalkill"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="serif-monospace"
@@ -153,6 +121,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/totalWins"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="serif-monospace"
@@ -266,6 +235,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/help"
                 android:layout_width="match_parent"
                 android:padding="5dp"
                 android:layout_height="35dp">
@@ -302,6 +272,7 @@
             android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/share"
                 android:layout_width="match_parent"
                 android:padding="5dp"
                 android:layout_height="35dp">
@@ -333,7 +304,6 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/base_color">
@@ -371,9 +341,9 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_marginTop="5dp"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/base_color">
 

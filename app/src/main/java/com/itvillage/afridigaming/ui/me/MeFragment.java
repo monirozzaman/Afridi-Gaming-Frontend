@@ -1,6 +1,7 @@
 package com.itvillage.afridigaming.ui.me;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.itvillage.afridigaming.BuildConfig;
 import com.itvillage.afridigaming.LoginActivity;
 import com.itvillage.afridigaming.PasswordChange;
 import com.itvillage.afridigaming.R;
@@ -31,7 +33,7 @@ import io.reactivex.schedulers.Schedulers;
 public class MeFragment extends Fragment {
 
     private MeViewModel mViewModel;
-    private TextView userProfileName,availableBalance;
+    private TextView userProfileName,availableBalance,totalkill,totalWins;
     private View view;
 
     public static MeFragment newInstance() {
@@ -46,13 +48,44 @@ public class MeFragment extends Fragment {
         ConstraintLayout moneyBag = view.findViewById(R.id.moneyBag);
         ConstraintLayout logoutUser = view.findViewById(R.id.logoutUser);
         ConstraintLayout changePassword = view.findViewById(R.id.changePassword);
+        ConstraintLayout help = view.findViewById(R.id.help);
+        ConstraintLayout share = view.findViewById(R.id.share);
 
         userProfileName = view.findViewById(R.id.userProfileName);
         availableBalance = view.findViewById(R.id.availableBalance);
+        totalkill = view.findViewById(R.id.totalkill);
+        totalWins = view.findViewById(R.id.totalWins);
 
 
         getUserProfile();
 
+        share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Afridi Gaming");
+                    String shareMessage= "\nLet me recommend you this application\n\n";
+                    shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID +"\n\n";
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                    startActivity(Intent.createChooser(shareIntent, "choose one"));
+                } catch(Exception e) {
+                    //e.toString();
+                }
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                ViewGroup viewGroup = v.findViewById(android.R.id.content);
+                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_add_monet_help, viewGroup, false);
+                builder.setView(dialogView);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
         moneyBag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -103,6 +136,8 @@ public class MeFragment extends Fragment {
 
                     userProfileName.setText(getUserProfile.getFirstName());
                     availableBalance.setText(Double.toString(getUserProfile.getAcBalance()));
+                    totalkill.setText(Integer.toString(getUserProfile.getTotalKill()));
+                    totalWins.setText(Double.toString(getUserProfile.getTotalEarn()));
 
                 }, throwable -> {
                     throwable.printStackTrace();

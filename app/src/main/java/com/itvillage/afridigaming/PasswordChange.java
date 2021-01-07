@@ -23,7 +23,6 @@ import io.reactivex.schedulers.Schedulers;
 
 public class PasswordChange extends AppCompatActivity {
 
-    private ImageView PassbtnBackPares;
     private TextInputEditText passwordEditText;
     private Button changeUpdatePassword;
     @Override
@@ -31,17 +30,10 @@ public class PasswordChange extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_change);
 
-        PassbtnBackPares = findViewById(R.id.PassbtnBackPares);
+
         passwordEditText = findViewById(R.id.passwordEditText);
         changeUpdatePassword = findViewById(R.id.changeUpdatePassword);
 
-        PassbtnBackPares.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), MeFragment.class));
-            }
-        });
 
         changeUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.services.LoginService;
 import com.itvillage.afridigaming.util.ApplicationSharedPreferencesUtil;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -92,11 +93,23 @@ public class LoginActivity extends AppCompatActivity {
                     onLoginSuccess(loginIn);
 
                 }, throwable -> {
-
+                    onLoginFailure(throwable);
                 }, () -> {
 
                 });
 
+    }
+    private void onLoginFailure(Throwable throwable) {
+
+        if (throwable instanceof HttpException) {
+            HttpException httpException = (HttpException) throwable;
+
+            if (httpException.code() == 500 || httpException.code() == 401) {
+                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+
+            }
+            Log.e("Error", "" + throwable.getMessage());
+        }
     }
 
     private void onLoginSuccess(LoginResponse loginResponse) {
@@ -125,6 +138,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_LONG).show();
-        dialog.dismiss();
+
     }
 }

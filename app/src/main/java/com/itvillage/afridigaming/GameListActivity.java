@@ -3,14 +3,17 @@ package com.itvillage.afridigaming;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.itvillage.afridigaming.adapter.AdminGameListAdapter;
 import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
+import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.services.GetAllGamesService;
 
 import java.util.ArrayList;
@@ -24,6 +27,8 @@ public class GameListActivity extends AppCompatActivity {
     ListView list;
     private Button addGameBut;
 
+    ArrayList<String> gameIdList = new ArrayList<>();
+    ArrayList<String> roomIdAndPassList = new ArrayList<>();
     ArrayList<String> gameNameArray = new ArrayList<>();
     ArrayList<String> gameSubNameArray = new ArrayList<>();
     ArrayList<Integer> imageArray = new ArrayList<>();
@@ -38,6 +43,11 @@ public class GameListActivity extends AppCompatActivity {
     ArrayList<String> winnerPrizeArray = new ArrayList<>();
     ArrayList<String> secondPrizeArray = new ArrayList<>();
     ArrayList<String> thirdPrizeArray = new ArrayList<>();
+
+    ArrayList<Boolean> gameIsActiveList = new ArrayList<>();
+
+
+    List<RegisterUsersInGameEntity> RegisterUsersInGameEntityArray = new ArrayList<>();
 
 
     @Override
@@ -62,40 +72,45 @@ public class GameListActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void setAllGamesInList() {
-//        GetAllGamesService getAllGamesService = new GetAllGamesService(getApplicationContext());
-//        Observable<List<GameResponse>> listObservable =
-//                getAllGamesService.getAllActiveGame();
-//
-//        listObservable.subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(gameResponses -> {
-//                    for (GameResponse gameResponse : gameResponses) {
-//
-//                        gameNameArray.add(gameResponse.getGameName() + " | Mobile Only | " + gameResponse.getGameNumber());
-//                        gameSubNameArray.add(gameResponse.getCreatedAt());
-//                        imageArray.add(R.drawable.free_fire);
-//                        gameTotalPrizeArray.add(String.valueOf(gameResponse.getTotalPrize()));
-//                        gamePerKillPrizeArray.add(String.valueOf(gameResponse.getPerKillPrize()));
-//                        gameEntryFeeArray.add(String.valueOf(gameResponse.getEntryFee()));
-//                        gameTypeArray.add(gameResponse.getGameType());
-//                        gameVersionArray.add(gameResponse.getVersion());
-//                        gameMapArray.add(gameResponse.getMap());
-//
-//                        winnerPrizeArray.add(String.valueOf(gameResponse.getWinnerPrize()));
-//                        secondPrizeArray.add(String.valueOf(gameResponse.getSecondPrize()));
-//                        thirdPrizeArray.add(String.valueOf(gameResponse.getThirdPrize()));
-//
-//
-//                    }
-//                    GameListAdapter adapter = new GameListAdapter(this, gameNameArray, gameSubNameArray,
-//                            imageArray, gameTotalPrizeArray, gamePerKillPrizeArray,
-//                            gameEntryFeeArray, gameTypeArray, gameVersionArray, gameMapArray,winnerPrizeArray,secondPrizeArray,thirdPrizeArray);
-//                    list = (ListView) findViewById(R.id.game_list);
-//                    list.setAdapter(adapter);
-//                }, throwable -> {
-//                    throwable.printStackTrace();
-//                }, () -> {
-//
-//                });
+        GetAllGamesService getAllGamesService = new GetAllGamesService(getApplicationContext());
+        Observable<List<GameResponse>> listObservable =
+                getAllGamesService.getAllActiveGame();
+
+        listObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(gameResponses -> {
+                    for (GameResponse gameResponse : gameResponses) {
+
+                        RegisterUsersInGameEntityArray = gameResponse.getRegisterUsersInGameEntities();
+                        gameIdList.add(gameResponse.getId());
+                        gameNameArray.add(gameResponse.getGameName() + " | Mobile Only | " + gameResponse.getGameNumber());
+                        gameSubNameArray.add(gameResponse.getCreatedAt());
+                        imageArray.add(R.drawable.free_fire);
+                        gameTotalPrizeArray.add(String.valueOf(gameResponse.getTotalPrize()));
+                        gamePerKillPrizeArray.add(String.valueOf(gameResponse.getPerKillPrize()));
+                        gameEntryFeeArray.add(String.valueOf(gameResponse.getEntryFee()));
+                        gameTypeArray.add(gameResponse.getGameType());
+                        gameVersionArray.add(gameResponse.getVersion());
+                        gameMapArray.add(gameResponse.getMap());
+                        roomIdAndPassList.add("Room ID: "+gameResponse.getRoomId()+" | Password: "+ gameResponse.getRoomPassword()+"");
+
+                        winnerPrizeArray.add(String.valueOf(gameResponse.getWinnerPrize()));
+                        secondPrizeArray.add(String.valueOf(gameResponse.getSecondPrize()));
+                        thirdPrizeArray.add(String.valueOf(gameResponse.getThirdPrize()));
+
+                        gameIsActiveList.add(gameResponse.isGameIsActive());
+
+
+                    }
+                    AdminGameListAdapter adapter = new AdminGameListAdapter(this, gameIdList,gameNameArray, gameSubNameArray, imageArray,gameTotalPrizeArray,
+                            gamePerKillPrizeArray, gameEntryFeeArray, gameTypeArray, gameVersionArray, gameMapArray,winnerPrizeArray,secondPrizeArray,thirdPrizeArray,
+                            RegisterUsersInGameEntityArray,gameIsActiveList,roomIdAndPassList);
+                    list = (ListView) findViewById(R.id.game_list);
+                    list.setAdapter(adapter);
+                }, throwable -> {
+                    throwable.printStackTrace();
+                }, () -> {
+
+                });
     }
 }

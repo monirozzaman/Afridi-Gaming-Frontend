@@ -66,18 +66,48 @@
                     android:padding="2dp"
                     android:gravity="center"
                     android:textSize="12dp"
-                    android:text="Payment Way"
+                    android:text="Total Prize"
                     android:textAllCaps="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/totalPrizeText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
+                    android:text="20"
+                    android:textColor="@color/black"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
                     android:textSize="12dp"
+                    android:padding="2dp"
+                    android:text="Per Kill"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#4d4d4d"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/totalKillText"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
                     android:text="20"
                     android:textColor="@color/black" />
             </LinearLayout>
@@ -95,41 +125,14 @@
                     android:gravity="center"
                     android:textSize="12dp"
                     android:padding="2dp"
-                    android:text="Amount "
+                    android:text="Entry Fee"
                     android:textAllCaps="true"
                     android:textAppearance="?android:attr/textAppearanceMedium"
                     android:textColor="#4d4d4d"
                     android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="20"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="130dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center"
-                    android:textSize="12dp"
-                    android:padding="2dp"
-                    android:text="Last 3 Digit"
-                    android:textAllCaps="true"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textColor="#4d4d4d"
-                    android:textStyle="bold" />
-
-                <TextView
+                    android:id="@+id/totalFeeText"
                     android:layout_width="130dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -138,11 +141,100 @@
                     android:textColor="@color/black" />
             </LinearLayout>
         </LinearLayout>
-        <TextView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:text="Requested By: Game Id"/>
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="Type"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#4d4d4d"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/typeText"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="25"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="Version"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#4d4d4d"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/versionText"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:text="23"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:padding="2dp"
+                    android:text="Map"
+                    android:textAllCaps="true"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="#4d4d4d"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/mapText"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="center"
+                    android:textSize="12dp"
+                    android:text="34"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,6 +244,7 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/watch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="5dp"
@@ -160,11 +253,13 @@
                 android:text="Watch Match" />
 
             <Button
+                android:id="@+id/notJoin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="NOT JOINED" />
         </LinearLayout>
         <Button
+            android:id="@+id/totalPrz"
             android:layout_marginRight="5px"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

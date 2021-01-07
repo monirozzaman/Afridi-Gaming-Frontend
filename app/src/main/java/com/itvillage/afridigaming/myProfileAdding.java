@@ -33,20 +33,20 @@ public class myProfileAdding extends AppCompatActivity {
 
 
 
-        btnBack = findViewById(R.id.btnBackPares);
+       // btnBack = findViewById(R.id.btnBackPares);
         firstNameEditText = findViewById(R.id.firstNameEditText);
         lastNameEditText = findViewById(R.id.lastNameEditText);
         mobileNumber = findViewById(R.id.mobileNumber);
 
         crProfile = findViewById(R.id.crProfile);
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startActivity(new Intent(getApplicationContext(), MeFragment.class));
-            }
-        });
+//        btnBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//                startActivity(new Intent(getApplicationContext(), MeFragment.class));
+//            }
+//        });
 
         crProfile.setOnClickListener(new View.OnClickListener() {
             @Override
