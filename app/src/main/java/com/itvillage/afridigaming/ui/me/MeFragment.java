@@ -137,7 +137,7 @@ public class MeFragment extends Fragment {
                     userProfileName.setText(getUserProfile.getFirstName());
                     availableBalance.setText(Double.toString(getUserProfile.getAcBalance()));
                     totalkill.setText(Integer.toString(getUserProfile.getTotalKill()));
-                    totalWins.setText(Double.toString(getUserProfile.getTotalEarn()));
+                    totalWins.setText(Double.toString(getUserProfile.getAcBalance()));
 
                 }, throwable -> {
                     throwable.printStackTrace();

@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
+import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.services.GetAllGamesService;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public class GamesShowUserViewActivity extends AppCompatActivity {
     ArrayList<String> winnerPrizeArray = new ArrayList<>();
     ArrayList<String> secondPrizeArray = new ArrayList<>();
     ArrayList<String> thirdPrizeArray = new ArrayList<>();
+    ArrayList<String> roomIdAndPassList = new ArrayList<>();
+
+    List<RegisterUsersInGameEntity> RegisterUsersInGameEntityArray = new ArrayList<>();
 
     private ListView game_list_show;
     @Override
@@ -55,6 +59,7 @@ public class GamesShowUserViewActivity extends AppCompatActivity {
                 .subscribe(gameResponses -> {
                     for (GameResponse gameResponse : gameResponses) {
 
+                        RegisterUsersInGameEntityArray = gameResponse.getRegisterUsersInGameEntities();
                         gameIdArray.add(gameResponse.getId());
                         gameNameArray.add(gameResponse.getGameName() + " | Mobile Only | " + gameResponse.getGameNumber());
                         gameSubNameArray.add(gameResponse.getCreatedAt());
@@ -65,6 +70,7 @@ public class GamesShowUserViewActivity extends AppCompatActivity {
                         gameTypeArray.add(gameResponse.getGameType());
                         gameVersionArray.add(gameResponse.getVersion());
                         gameMapArray.add(gameResponse.getMap());
+                        roomIdAndPassList.add("Room ID: "+gameResponse.getRoomId()+" | Password: "+ gameResponse.getRoomPassword()+"");
 
                         winnerPrizeArray.add(String.valueOf(gameResponse.getWinnerPrize()));
                         secondPrizeArray.add(String.valueOf(gameResponse.getSecondPrize()));
@@ -73,7 +79,7 @@ public class GamesShowUserViewActivity extends AppCompatActivity {
                     }
                     GameListAdapter adapter = new GameListAdapter(this, gameIdArray,gameNameArray, gameSubNameArray,
                             imageArray, gameTotalPrizeArray, gamePerKillPrizeArray,
-                            gameEntryFeeArray, gameTypeArray, gameVersionArray, gameMapArray,winnerPrizeArray,secondPrizeArray,thirdPrizeArray);
+                            gameEntryFeeArray, gameTypeArray, gameVersionArray, gameMapArray,winnerPrizeArray,secondPrizeArray,thirdPrizeArray,RegisterUsersInGameEntityArray,roomIdAndPassList);
                     game_list_show = (ListView) findViewById(R.id.game_list_show);
                     game_list_show.setAdapter(adapter);
 

@@ -310,7 +310,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Room ID: 123123 | Password: 345345"
+                android:text="Room ID:  | Password: "
                 android:textColor="@color/black"
                 android:textSize="15dp"
                 android:textStyle="bold" />
@@ -330,7 +330,7 @@
                     android:layout_marginRight="5dp"
                     android:backgroundTint="#E40B0B"
                     android:text="Total Prize Details"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/showAllPlayers"
@@ -338,7 +338,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:text="All Players"
-                    android:textSize="12dp" />
+                    android:textSize="10dp" />
 
                 <Button
                     android:id="@+id/publishOrUn"

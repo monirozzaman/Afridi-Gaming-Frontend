@@ -1,6 +1,7 @@
 package com.itvillage.afridigaming;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.itvillage.afridigaming.config.Utility;
+import com.itvillage.afridigaming.dto.response.RegistrationGameResponse;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
 import com.itvillage.afridigaming.services.GetUserService;
 import com.itvillage.afridigaming.services.RegistrationInGameService;
@@ -21,15 +24,15 @@ import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Response;
 
 public class JoinNowUserActivity extends AppCompatActivity {
 
     private String gameId, gameName, totalEntryFee, entryFeePerPerson, myBalance;
-    private RadioGroup gameTypeGroup;
-    private RadioButton gameTypeBut;
     private EditText playerId1EditText,playerId2EditText,playerId3EditText;
     private TextView myBalanceTextView,gameNameTextView,entryFeePerTotalMatchTextView,entryFeePerMatchTextView;
     private Button joinBut;
+    private String squadPlayerNo= null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,23 +53,36 @@ public class JoinNowUserActivity extends AppCompatActivity {
         playerId2EditText = findViewById(R.id.playerId2EditText);
         playerId3EditText = findViewById(R.id.playerId3EditText);
 
-        //TODO : Fix Group Radio Button
-        gameTypeGroup = (RadioGroup) findViewById(R.id.gameTypeGroup);
-        gameTypeGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
+        RadioGroup rg = (RadioGroup) findViewById(R.id.gameTypeGroup);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int id=group.getCheckedRadioButtonId();
-                RadioButton rb=(RadioButton) findViewById(id);
-                gameTypeBut =(RadioButton) findViewById(checkedId);
-
-
+                squadPlayerNo = ((RadioButton)findViewById(checkedId)).getText().toString();
+                switch (squadPlayerNo.toLowerCase()) {
+                    case "solo":
+                        playerId1EditText.setEnabled(true);
+                        playerId2EditText.setEnabled(false);
+                        playerId3EditText.setEnabled(false);
+                        break;
+                    case "duo":
+                        playerId1EditText.setEnabled(true);
+                        playerId2EditText.setEnabled(true);
+                        playerId3EditText.setEnabled(false);
+                        break;
+                    case "squad":
+                        playerId1EditText.setEnabled(true);
+                        playerId2EditText.setEnabled(true);
+                        playerId3EditText.setEnabled(true);
+                        break;
+                }
+                Toast.makeText(getBaseContext(), squadPlayerNo, Toast.LENGTH_SHORT).show();
             }
         });
 
-        joinBut = findViewById(R.id.joinBut);
 
         getUserProfileBalance();
 
+        joinBut = findViewById(R.id.joinBut);
         joinBut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -88,7 +104,7 @@ public class JoinNowUserActivity extends AppCompatActivity {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(getUserProfile -> {
                     myBalance = String.valueOf(getUserProfile.getAcBalance());
-                    myBalanceTextView.setText("Available Balance : "+"00");
+                    myBalanceTextView.setText("Available Balance : "+myBalance);
                     gameNameTextView.setText(gameName);
                     entryFeePerTotalMatchTextView.setText("Total Entry Fee : "+totalEntryFee);
                     entryFeePerMatchTextView.setText("Game Entry Fee Per Person: "+entryFeePerPerson);
@@ -101,18 +117,20 @@ public class JoinNowUserActivity extends AppCompatActivity {
     @SuppressLint("CheckResult")
     private void registrationInGame() {
 
-        gameTypeBut = findViewById(gameTypeGroup.getCheckedRadioButtonId());
         RegistrationInGameService getUserService = new RegistrationInGameService(getApplicationContext());
-        Observable<Void> userCreateProfileResponseObservable =
-                getUserService.registrationInGame(gameId," gameTypeBut.getText().toString()",playerId1EditText.getText().toString(),playerId2EditText.getText().toString(),playerId3EditText.getText().toString());
+        Observable<RegistrationGameResponse> userCreateProfileResponseObservable =
+                getUserService.registrationInGame(gameId,squadPlayerNo.toLowerCase(),playerId1EditText.getText().toString(),playerId2EditText.getText().toString(),playerId3EditText.getText().toString());
 
         userCreateProfileResponseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(getUserProfile -> {
+                .subscribe(loginIn -> {
+
+                    onLoginSuccess(loginIn);
 
                 }, throwable -> {
                     onLoginFailure(throwable);
                 }, () -> {
+
                 });
 
     }
@@ -122,10 +140,17 @@ public class JoinNowUserActivity extends AppCompatActivity {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 403) {
-                Toast.makeText(getApplicationContext(), "Insufficient Balance", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
 
             }
-            Log.e("Error", "" + throwable.getMessage());
+           Utility.onErrorAlert("Inefficient Balance",this);
         }
+    }
+
+    private void onLoginSuccess(RegistrationGameResponse loginIn) {
+
+        Utility.onSuccessAlert("Registration Success",this);
+        Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_LONG).show();
+
     }
 }

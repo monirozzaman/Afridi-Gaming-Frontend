@@ -157,14 +157,21 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
                 ViewGroup viewGroup = context.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_dialog_for_list_show, viewGroup, false);
 
-                ArrayList<String> playerName = new ArrayList<>();
-                for (RegisterUsersInGameEntity registerUsersInGameEntity : registerUsersInGameEntityArray) {
-                    playerName.add(registerUsersInGameEntity.getPartnerOneName() + "," + registerUsersInGameEntity.getPartnerTwoName() + "," + registerUsersInGameEntity.getPartnerThreeName());
+                ArrayList<String> playerIdList = new ArrayList<>();
+                ArrayList<String> userNameOfGameList = new ArrayList<>();
+                if(registerUsersInGameEntityArray.isEmpty())
+                {
+                    playerIdList.add("No Registered Player Found!!");
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(dialogView.getContext(), android.R.layout.simple_list_item_1, playerName);
+                for (RegisterUsersInGameEntity registerUsersInGameEntity : registerUsersInGameEntityArray) {
+                    playerIdList.add(registerUsersInGameEntity.getUserId());
+                    userNameOfGameList.add(registerUsersInGameEntity.getPartnerOneName()+"   "+registerUsersInGameEntity.getPartnerTwoName()+"   "+registerUsersInGameEntity.getPartnerThreeName());
+                }
+
+                AdminGameResultAddAdapter adapter = new AdminGameResultAddAdapter(context,playerIdList,gameIdArray.get(position),userNameOfGameList);
                 ListView playerList = dialogView.findViewById(R.id.playerList);
-                playerList.setAdapter(arrayAdapter);
+                playerList.setAdapter(adapter);
 
 
                 builder.setView(dialogView);

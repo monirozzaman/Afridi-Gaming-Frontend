@@ -6,6 +6,7 @@ import com.itvillage.afridigaming.api.LoginApi;
 import com.itvillage.afridigaming.api.RegistrationInGameApi;
 import com.itvillage.afridigaming.config.ApiClient;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
+import com.itvillage.afridigaming.dto.response.RegistrationGameResponse;
 
 import io.reactivex.Observable;
 import okhttp3.MediaType;
@@ -20,7 +21,7 @@ public class RegistrationInGameService {
         this.context = context;
     }
 
-    public Observable<Void> registrationInGame(String gameId,String partnerType, String partnerOneName,String partnerTwoName, String partnerThreeName) {
+    public Observable<RegistrationGameResponse> registrationInGame(String gameId, String partnerType, String partnerOneName, String partnerTwoName, String partnerThreeName) {
 
         String registrationRequestBody = String.format(LOGIN_REQUEST_BODY_FORMAT,partnerType ,partnerOneName, partnerTwoName, partnerThreeName);
 
