@@ -10,6 +10,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface CreateNewGameApi {
-    @POST("/api/auth/admin/create/game")
+    @POST("api/auth/admin/create/game")
     Observable<String> createNewGame(@Body RequestBody body);
 }

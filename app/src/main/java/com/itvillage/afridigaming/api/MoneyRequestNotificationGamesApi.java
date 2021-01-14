@@ -9,6 +9,6 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface MoneyRequestNotificationGamesApi {
-    @GET("/api/auth/admin/show/balance/request/inactive")
+    @GET("api/auth/admin/show/balance/request/inactive")
     Observable<List<RequestedNotificationResponse>> getMoneyRequestNotificationGames();
 }

@@ -9,6 +9,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface SignUpApi {
-    @POST("/api/auth/user/signup")
-    Observable<SignUpResponse> signUp(@Body RequestBody body);
+    @POST("api/auth/user/signup")
+    Observable<String> signUp(@Body RequestBody body);
 }

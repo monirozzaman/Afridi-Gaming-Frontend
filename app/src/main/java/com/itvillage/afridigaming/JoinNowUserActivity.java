@@ -75,7 +75,7 @@ public class JoinNowUserActivity extends AppCompatActivity {
                         playerId3EditText.setEnabled(true);
                         break;
                 }
-                Toast.makeText(getBaseContext(), squadPlayerNo, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), squadPlayerNo+" Selected", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -89,7 +89,7 @@ public class JoinNowUserActivity extends AppCompatActivity {
                 registrationInGame();
             }
         });
-        Log.e("dsfcdhgjgg", gameId);
+
     }
 
     @SuppressLint("CheckResult")
@@ -132,6 +132,8 @@ public class JoinNowUserActivity extends AppCompatActivity {
                 }, () -> {
 
                 });
+      //  Utility.onSuccessAlert("Join Successful",this);
+      //  startActivity(new Intent(this.getApplicationContext(),UserHomeActivity.class));
 
     }
     private void onLoginFailure(Throwable throwable) {
@@ -140,10 +142,12 @@ public class JoinNowUserActivity extends AppCompatActivity {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 403) {
-                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+                Utility.onErrorAlert("Already Registered",this);
 
+            }else {
+                Utility.onErrorAlert("Inefficient Balance",this);
             }
-           Utility.onErrorAlert("Inefficient Balance",this);
+
         }
     }
 

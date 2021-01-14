@@ -9,6 +9,6 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface UserGetProfile {
-    @GET("/api/auth/user/show/profile")
+    @GET("api/auth/user/show/profile")
     Observable<UserCreateProfileResponse> getUserProfile();
 }

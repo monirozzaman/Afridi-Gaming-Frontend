@@ -8,6 +8,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UpdateGameResultApi {
-    @PUT("/api/auth/admin/update/balance/users/{userId}/game/{gameId}")
+    @PUT("api/auth/admin/update/balance/users/{userId}/game/{gameId}")
     Observable<Void> updateGameResultApi(@Path("userId") String userId,@Path("gameId") String gameId,@Body RequestBody body);
 }

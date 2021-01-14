@@ -9,6 +9,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface UpdateRoomIdAndPasswordApi {
-    @PUT("/api/auth/admin/update/games/profile/{id}")
+    @PUT("api/auth/admin/update/games/profile/{id}")
     Observable<Void> updateRoomIdAndPasswordApi(@Path("id") String id,@Body RequestBody body);
 }

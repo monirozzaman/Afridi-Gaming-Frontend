@@ -9,6 +9,6 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface LoginApi {
-    @POST("/api/auth/common/signin")
+    @POST("api/auth/common/signin")
     Observable<LoginResponse> signIn(@Body RequestBody body);
 }

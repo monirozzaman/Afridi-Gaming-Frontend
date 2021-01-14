@@ -10,6 +10,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface RegistrationInGameApi {
-    @PUT("/api/auth/registration/user/games/{gameId}")
+    @PUT("api/auth/registration/user/games/{gameId}")
     Observable<RegistrationGameResponse> registrationInGame(@Path("gameId") String gameId, @Body RequestBody body);
 }

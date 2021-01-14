@@ -9,6 +9,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 public interface UpdatePasswordApi {
-    @PUT("/api/auth/common/password/Change/user/admin")
+    @PUT("api/auth/common/password/Change/user/admin")
     Observable<UpdatePasswordResponse> updatePassword(@Body RequestBody body);
 }
