@@ -62,14 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
               login(emailEditText.getText().toString(), password.getText().toString());
 
-               /* if(emailEditText.getText().toString().equals("admin") && emailEditText.getText().toString().equals("admin"))
-                {
-                    Log.e(emailEditText.getText().toString()+"---------",emailEditText.getText().toString());
-                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                }else {
-                    Log.e(emailEditText.getText().toString()+"----else-----",emailEditText.getText().toString());
-                    startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                }*/
+
 
             }
         });

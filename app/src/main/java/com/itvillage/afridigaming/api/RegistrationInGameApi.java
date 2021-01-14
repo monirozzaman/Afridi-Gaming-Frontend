@@ -11,5 +11,5 @@ import retrofit2.http.Path;
 
 public interface RegistrationInGameApi {
     @PUT("api/auth/registration/user/games/{gameId}")
-    Observable<RegistrationGameResponse> registrationInGame(@Path("gameId") String gameId, @Body RequestBody body);
+    Observable<String> registrationInGame(@Path("gameId") String gameId, @Body RequestBody body);
 }

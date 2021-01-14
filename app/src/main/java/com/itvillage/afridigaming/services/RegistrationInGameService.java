@@ -21,7 +21,7 @@ public class RegistrationInGameService {
         this.context = context;
     }
 
-    public Observable<RegistrationGameResponse> registrationInGame(String gameId, String partnerType, String partnerOneName, String partnerTwoName, String partnerThreeName) {
+    public Observable<String> registrationInGame(String gameId, String partnerType, String partnerOneName, String partnerTwoName, String partnerThreeName) {
 
         String registrationRequestBody = String.format(LOGIN_REQUEST_BODY_FORMAT,partnerType ,partnerOneName, partnerTwoName, partnerThreeName);
 

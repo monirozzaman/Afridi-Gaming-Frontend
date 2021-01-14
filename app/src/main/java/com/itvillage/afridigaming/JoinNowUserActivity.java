@@ -118,14 +118,14 @@ public class JoinNowUserActivity extends AppCompatActivity {
     private void registrationInGame() {
 
         RegistrationInGameService getUserService = new RegistrationInGameService(getApplicationContext());
-        Observable<RegistrationGameResponse> userCreateProfileResponseObservable =
+        Observable<String> userCreateProfileResponseObservable =
                 getUserService.registrationInGame(gameId,squadPlayerNo.toLowerCase(),playerId1EditText.getText().toString(),playerId2EditText.getText().toString(),playerId3EditText.getText().toString());
 
         userCreateProfileResponseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(loginIn -> {
 
-                    onLoginSuccess(loginIn);
+                    onLoginSuccess();
 
                 }, throwable -> {
                     onLoginFailure(throwable);
@@ -151,7 +151,7 @@ public class JoinNowUserActivity extends AppCompatActivity {
         }
     }
 
-    private void onLoginSuccess(RegistrationGameResponse loginIn) {
+    private void onLoginSuccess() {
 
         Utility.onSuccessAlert("Registration Success",this);
         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_LONG).show();
