@@ -23,7 +23,7 @@ public class SignUpService {
     }
 
 
-    public Observable<SignUpResponse> createPatientWithSignUP(String userName,
+    public Observable<String> createPatientWithSignUP(String userName,
                                                               String email,
                                                               String password) {
 

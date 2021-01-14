@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.itvillage.afridigaming.util.ApplicationSharedPreferencesUtil;
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -27,7 +29,8 @@ public class ApiClient {
     private static Retrofit retrofit = null;
     private static int REQUEST_TIMEOUT = 60;
     private static OkHttpClient okHttpClient;
-    private static String BASE_URL = "http://10.0.2.2:8088";
+    private static String BASE_URL = "http://10.0.2.2:8088/";
+    //private static String BASE_URL = "http://123.49.62.227:9020/gdm/";
     //private static String BASE_URL = "http://10.0.2.15:8088";
     //private static String BASE_URL = "http://192.168.0.100:8088";
 
@@ -38,11 +41,14 @@ public class ApiClient {
         }
 
         if (retrofit == null) {
+            Gson gson = new GsonBuilder()
+                    .setLenient()
+                    .create();
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .client(okHttpClient)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(gson))
                     .build();
         }
         return retrofit;

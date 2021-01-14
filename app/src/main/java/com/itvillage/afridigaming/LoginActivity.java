@@ -13,10 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.auth0.android.jwt.Claim;
+import com.auth0.android.jwt.JWT;
 import com.google.android.material.textfield.TextInputEditText;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.services.LoginService;
 import com.itvillage.afridigaming.util.ApplicationSharedPreferencesUtil;
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,14 +62,7 @@ public class LoginActivity extends AppCompatActivity {
 
               login(emailEditText.getText().toString(), password.getText().toString());
 
-               /* if(emailEditText.getText().toString().equals("admin") && emailEditText.getText().toString().equals("admin"))
-                {
-                    Log.e(emailEditText.getText().toString()+"---------",emailEditText.getText().toString());
-                    startActivity(new Intent(getApplicationContext(), AdminHomeActivity.class));
-                }else {
-                    Log.e(emailEditText.getText().toString()+"----else-----",emailEditText.getText().toString());
-                    startActivity(new Intent(getApplicationContext(), UserHomeActivity.class));
-                }*/
+
 
             }
         });
@@ -78,9 +74,7 @@ public class LoginActivity extends AppCompatActivity {
     private void login(String username, String password) {
 
         LoginService loginService = new LoginService(this);
-//        loginService.login(username,password).subscribe( res ->{
-//             System.out.println(res);
-//        });
+
         Observable<LoginResponse> responseObservable = loginService.login(username, password);
 
 
@@ -92,27 +86,51 @@ public class LoginActivity extends AppCompatActivity {
                     onLoginSuccess(loginIn);
 
                 }, throwable -> {
-
+                    onLoginFailure(throwable);
                 }, () -> {
 
                 });
 
     }
+    private void onLoginFailure(Throwable throwable) {
+
+        if (throwable instanceof HttpException) {
+            HttpException httpException = (HttpException) throwable;
+
+            if (httpException.code() == 500 || httpException.code() == 401) {
+                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+
+            }
+            Log.e("Error", "" + throwable.getMessage());
+        }
+    }
 
     private void onLoginSuccess(LoginResponse loginResponse) {
 
+        Log.e("Access Token",String.valueOf(loginResponse.getAccessToken()));
 
-        perfUtil.saveAccessToken(loginResponse.getAccessToken());
+        perfUtil.saveAccessToken(String.valueOf(loginResponse.getAccessToken()));
 
-        /*JWT parsedJWT = new JWT(loginResponse.getToken());
+        JWT parsedJWT = new JWT(String.valueOf(loginResponse.getAccessToken()));
         Claim subscriptionMetaData = parsedJWT.getClaim("scopes");
         String parsedValue = subscriptionMetaData.asString();
-*/
 
-        Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
-        startActivity(intent);
+        Log.e("Access Token",parsedValue);
+
+        if (parsedValue.equals("SUPER_ADMIN")){
+            Intent intent = new Intent(LoginActivity.this, AdminHomeActivity.class);
+            startActivity(intent);
+        }
+
+        else if (parsedValue.equals("USER")){
+            Intent intent = new Intent(LoginActivity.this, UserHomeActivity.class);
+            startActivity(intent);
+        }
+
+
+
 
         Toast.makeText(getApplicationContext(), "Login Successful.", Toast.LENGTH_LONG).show();
-        dialog.dismiss();
+
     }
 }

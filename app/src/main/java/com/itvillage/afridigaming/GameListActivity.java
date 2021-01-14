@@ -1,76 +1,116 @@
 package com.itvillage.afridigaming;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.Toast;
-
+import com.itvillage.afridigaming.adapter.AdminGameListAdapter;
 import com.itvillage.afridigaming.adapter.GameListAdapter;
+import com.itvillage.afridigaming.dto.response.GameResponse;
+import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
+import com.itvillage.afridigaming.services.GetAllGamesService;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 
 public class GameListActivity extends AppCompatActivity {
     ListView list;
+    private Button addGameBut;
 
-    String[] maintitle ={
-            "All Weapons | Mobile Only | 3234","Title 2",
-            "Title 3","Title 4",
-            "Title 5",
-    };
+    ArrayList<String> gameIdList = new ArrayList<>();
+    ArrayList<String> roomIdAndPassList = new ArrayList<>();
+    ArrayList<String> gameNameArray = new ArrayList<>();
+    ArrayList<String> gameSubNameArray = new ArrayList<>();
+    ArrayList<Integer> imageArray = new ArrayList<>();
 
-    String[] subtitle ={
-            "Time: 29/29/2020 at 20:20 ","Sub Title 2",
-            "Sub Title 3","Sub Title 4",
-            "Sub Title 5",
-    };
+    ArrayList<String> gameTotalPrizeArray = new ArrayList<>();
+    ArrayList<String> gamePerKillPrizeArray = new ArrayList<>();
+    ArrayList<String> gameEntryFeeArray = new ArrayList<>();
+    ArrayList<String> gameTypeArray = new ArrayList<>();
+    ArrayList<String> gameVersionArray = new ArrayList<>();
+    ArrayList<String> gameMapArray = new ArrayList<>();
 
-    Integer[] imgid={
-            R.drawable.free_fire,R.drawable.free_fire,
-            R.drawable.free_fire,R.drawable.free_fire,
-            R.drawable.free_fire
-    };
+    ArrayList<String> winnerPrizeArray = new ArrayList<>();
+    ArrayList<String> secondPrizeArray = new ArrayList<>();
+    ArrayList<String> thirdPrizeArray = new ArrayList<>();
+
+    ArrayList<Boolean> gameIsActiveList = new ArrayList<>();
+
+
+    List<RegisterUsersInGameEntity> RegisterUsersInGameEntityArray = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_list);
 
-        GameListAdapter adapter=new GameListAdapter(this, maintitle, subtitle,imgid);
-        list=(ListView)findViewById(R.id.game_list);
-        list.setAdapter(adapter);
+        addGameBut = findViewById(R.id.addGameBut);
+
+        addGameBut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AddNewGameAdminActivity.class));
+            }
+        });
+
+        setAllGamesInList();
 
 
-//        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                // TODO Auto-generated method stub
-//                if(position == 0) {
-//                    //code specific to first list item
-//                    Toast.makeText(getApplicationContext(),"Place Your First Option Code",Toast.LENGTH_SHORT).show();
-//                }
-//
-//                else if(position == 1) {
-//                    //code specific to 2nd list item
-//                    Toast.makeText(getApplicationContext(),"Place Your Second Option Code",Toast.LENGTH_SHORT).show();
-//                }
-//
-//                else if(position == 2) {
-//
-//                    Toast.makeText(getApplicationContext(),"Place Your Third Option Code",Toast.LENGTH_SHORT).show();
-//                }
-//                else if(position == 3) {
-//
-//                    Toast.makeText(getApplicationContext(),"Place Your Forth Option Code",Toast.LENGTH_SHORT).show();
-//                }
-//                else if(position == 4) {
-//
-//                    Toast.makeText(getApplicationContext(),"Place Your Fifth Option Code",Toast.LENGTH_SHORT).show();
-//                }
-//
-//            }
-//        });
 
+    }
+
+    @SuppressLint("CheckResult")
+    private void setAllGamesInList() {
+        GetAllGamesService getAllGamesService = new GetAllGamesService(getApplicationContext());
+        Observable<List<GameResponse>> listObservable =
+                getAllGamesService.getAllActiveGame();
+
+        listObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(gameResponses -> {
+                    for (GameResponse gameResponse : gameResponses) {
+
+                        RegisterUsersInGameEntityArray = gameResponse.getRegisterUsersInGameEntities();
+                        gameIdList.add(gameResponse.getId());
+                        gameNameArray.add(gameResponse.getGameName() + " | Mobile Only | " + gameResponse.getGameNumber());
+                        gameSubNameArray.add(gameResponse.getCreatedAt());
+                        imageArray.add(R.drawable.free_fire);
+                        gameTotalPrizeArray.add(String.valueOf(gameResponse.getTotalPrize()));
+                        gamePerKillPrizeArray.add(String.valueOf(gameResponse.getPerKillPrize()));
+                        gameEntryFeeArray.add(String.valueOf(gameResponse.getEntryFee()));
+                        gameTypeArray.add(gameResponse.getGameType());
+                        gameVersionArray.add(gameResponse.getVersion());
+                        gameMapArray.add(gameResponse.getMap());
+                        roomIdAndPassList.add("Room ID: "+gameResponse.getRoomId()+" | Password: "+ gameResponse.getRoomPassword()+"");
+
+                        winnerPrizeArray.add(String.valueOf(gameResponse.getWinnerPrize()));
+                        secondPrizeArray.add(String.valueOf(gameResponse.getSecondPrize()));
+                        thirdPrizeArray.add(String.valueOf(gameResponse.getThirdPrize()));
+
+                        gameIsActiveList.add(gameResponse.isGameIsActive());
+
+
+                    }
+                    AdminGameListAdapter adapter = new AdminGameListAdapter(this, gameIdList,gameNameArray, gameSubNameArray, imageArray,gameTotalPrizeArray,
+                            gamePerKillPrizeArray, gameEntryFeeArray, gameTypeArray, gameVersionArray, gameMapArray,winnerPrizeArray,secondPrizeArray,thirdPrizeArray,
+                            RegisterUsersInGameEntityArray,gameIsActiveList,roomIdAndPassList);
+                    list = (ListView) findViewById(R.id.game_list);
+                    list.setAdapter(adapter);
+                }, throwable -> {
+                    throwable.printStackTrace();
+                }, () -> {
+
+                });
     }
 }

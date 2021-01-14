@@ -45,7 +45,8 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SignUpService createSignUpService = new SignUpService(getApplicationContext());
-                Observable<SignUpResponse> observable = createSignUpService.createPatientWithSignUP("fdg5645yt","fdgdf@gmai.com","123456ghjmj");
+              //  Observable<SignUpResponse> observable = createSignUpService.createPatientWithSignUP("fdg5645yt","fdgdf@gmai.com","123456ghjmj");
+                Observable<String> observable = createSignUpService.createPatientWithSignUP(userNameEditText.getText().toString(),emailEditText.getText().toString(),passwordEditText.getText().toString());
                 observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(signUpPatient -> {
