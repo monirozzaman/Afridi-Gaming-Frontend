@@ -10,5 +10,5 @@ import retrofit2.http.POST;
 
 public interface UserCreateProfile {
     @POST("api/auth/user/create/profile")
-    Observable<UserCreateProfileResponse> userCreate(@Body RequestBody body);
+    Observable<String> userCreate(@Body RequestBody body);
 }

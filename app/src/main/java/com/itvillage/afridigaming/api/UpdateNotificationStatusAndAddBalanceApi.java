@@ -8,5 +8,5 @@ import retrofit2.http.Path;
 
 public interface UpdateNotificationStatusAndAddBalanceApi {
     @PUT("api/auth/admin/update/balance/approve/users/{userId}/requests/{id}")
-    Observable<Void> updateNotificationStatusAndAddBalanceApi(@Path("id") String id,@Path("userId") String userId,@Body RequestBody body);
+    Observable<String> updateNotificationStatusAndAddBalanceApi(@Path("id") String id,@Path("userId") String userId,@Body RequestBody body);
 }

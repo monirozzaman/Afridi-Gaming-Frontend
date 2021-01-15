@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.auth0.android.jwt.Claim;
 import com.auth0.android.jwt.JWT;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
@@ -111,7 +112,7 @@ public class UserBalanceActivity extends AppCompatActivity {
 
         PostMoneyRequestService postMoneyRequestService = new PostMoneyRequestService(this);
 
-        Observable<Void> responseObservable = postMoneyRequestService.moneyRequest(transactionMethod,loadBalAmount,loadBalAmlastThreeDigitount);
+        Observable<String> responseObservable = postMoneyRequestService.moneyRequest(transactionMethod,loadBalAmount,loadBalAmlastThreeDigitount);
 
 
         responseObservable.subscribeOn(Schedulers.io())
@@ -133,7 +134,7 @@ public class UserBalanceActivity extends AppCompatActivity {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 401) {
-                Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+                Utility.onErrorAlert("Something Wrong",this);
 
             }
             Log.e("Error", "" + throwable.getMessage());
@@ -142,7 +143,7 @@ public class UserBalanceActivity extends AppCompatActivity {
 
     private void onLoginSuccess() {
 
-        Toast.makeText(getApplicationContext(), "Sent.", Toast.LENGTH_LONG).show();
+        Utility.onSuccessAlert("Payment Completed",this);
 
     }
 

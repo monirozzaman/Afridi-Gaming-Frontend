@@ -19,7 +19,7 @@ public class UpdateGameResultService {
         this.context = context;
     }
 
-    public Observable<Void> updateGameResultService(String gameId, String userId, String squadPrize,String numberOfKill) {
+    public Observable<String> updateGameResultService(String gameId, String userId, String squadPrize,String numberOfKill) {
 
         String updateRoomDetailsRequest = String.format(REQUEST_BODY_FORMAT, numberOfKill,squadPrize);
 

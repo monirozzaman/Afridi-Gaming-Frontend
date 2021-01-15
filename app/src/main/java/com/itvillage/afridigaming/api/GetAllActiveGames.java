@@ -9,6 +9,6 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface GetAllActiveGames {
-    @GET("api/auth/common/show/games")
+    @GET("api/auth/common/show/games/active")
     Observable<List<GameResponse>> getAllActiveGames();
 }

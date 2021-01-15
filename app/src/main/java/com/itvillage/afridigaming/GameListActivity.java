@@ -3,7 +3,6 @@ package com.itvillage.afridigaming;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -11,9 +10,9 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.itvillage.afridigaming.adapter.AdminGameListAdapter;
-import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
+import com.itvillage.afridigaming.services.GetAllActiveGamesService;
 import com.itvillage.afridigaming.services.GetAllGamesService;
 
 import java.util.ArrayList;
@@ -72,9 +71,9 @@ public class GameListActivity extends AppCompatActivity {
 
     @SuppressLint("CheckResult")
     private void setAllGamesInList() {
-        GetAllGamesService getAllGamesService = new GetAllGamesService(getApplicationContext());
+        GetAllGamesService getAllActiveGamesService = new GetAllGamesService(getApplicationContext());
         Observable<List<GameResponse>> listObservable =
-                getAllGamesService.getAllActiveGame();
+                getAllActiveGamesService.getAllGames();
 
         listObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

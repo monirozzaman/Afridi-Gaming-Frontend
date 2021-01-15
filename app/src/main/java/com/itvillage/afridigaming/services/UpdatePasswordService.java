@@ -21,7 +21,7 @@ public class UpdatePasswordService {
         this.context = context;
     }
 
-    public Observable<UpdatePasswordResponse> updatePassword(String password) {
+    public Observable<String> updatePassword(String password) {
 
         String updatePasswordResponse = String.format(LOGIN_REQUEST_BODY_FORMAT, password);
 

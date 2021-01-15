@@ -3,28 +3,22 @@ package com.itvillage.afridigaming.ui.ongoing;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
 import com.itvillage.afridigaming.GamesShowUserViewActivity;
 import com.itvillage.afridigaming.R;
-import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.config.ImageAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
-import com.itvillage.afridigaming.services.GetAllGamesService;
+import com.itvillage.afridigaming.services.GetAllActiveGamesService;
 
 import java.util.List;
 
@@ -61,9 +55,9 @@ public class HomeFragment extends Fragment {
 
     @SuppressLint("CheckResult")
     private void setAllGamesInList() {
-        GetAllGamesService getAllGamesService = new GetAllGamesService(this.getActivity());
+        GetAllActiveGamesService getAllActiveGamesService = new GetAllActiveGamesService(this.getActivity());
         Observable<List<GameResponse>> listObservable =
-                getAllGamesService.getAllActiveGame();
+                getAllActiveGamesService.getAllActiveGame();
 
         listObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

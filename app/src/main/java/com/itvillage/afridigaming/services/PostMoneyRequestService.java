@@ -20,7 +20,7 @@ public class PostMoneyRequestService {
         this.context = context;
     }
 
-    public Observable<Void> moneyRequest(String transactionMethod, String loadBalAmount, String loadBalAmlastThreeDigitount) {
+    public Observable<String> moneyRequest(String transactionMethod, String loadBalAmount, String loadBalAmlastThreeDigitount) {
 
         String loginRequestBody = String.format(LOGIN_REQUEST_BODY_FORMAT, transactionMethod, loadBalAmount,loadBalAmlastThreeDigitount);
 

@@ -19,7 +19,7 @@ public class UpdateGameSatusService {
         this.context = context;
     }
 
-    public Observable<Void> updateGameSatusService(String gameId,String status) {
+    public Observable<String> updateGameSatusService(String gameId,String status) {
 
         String updateRoomDetailsRequest = String.format(LOGIN_REQUEST_BODY_FORMAT, status);
 

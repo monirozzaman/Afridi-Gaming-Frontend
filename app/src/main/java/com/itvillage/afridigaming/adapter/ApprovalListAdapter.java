@@ -20,6 +20,7 @@ import com.itvillage.afridigaming.AdminHomeActivity;
 import com.itvillage.afridigaming.LoginActivity;
 import com.itvillage.afridigaming.R;
 import com.itvillage.afridigaming.UserHomeActivity;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.dto.response.UpdatePasswordResponse;
@@ -85,7 +86,12 @@ public class ApprovalListAdapter extends ArrayAdapter<String> {
                 updateNotificationStatusAndAddBalanceService(balanceIdList.get(position),userIdList.get(position),amt_text.getText().toString());
             }
         });
+        deny.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         return rowView;
 
     }
@@ -95,7 +101,7 @@ public class ApprovalListAdapter extends ArrayAdapter<String> {
 
         UpdateNotificationStatusAndAddBalanceService updateNotificationStatusAndAddBalanceService = new UpdateNotificationStatusAndAddBalanceService(context);
 
-        Observable<Void> responseObservable = updateNotificationStatusAndAddBalanceService.updateNotificationStatusAndAddBalanceService(balanceId,userId,balance);
+        Observable<String> responseObservable = updateNotificationStatusAndAddBalanceService.updateNotificationStatusAndAddBalanceService(balanceId,userId,balance);
 
         responseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -115,7 +121,7 @@ public class ApprovalListAdapter extends ArrayAdapter<String> {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 401) {
-                Toast.makeText(context, "Something Wrong", Toast.LENGTH_LONG).show();
+                Utility.onErrorAlert("Something Wrong",context);
 
             }
             Log.e("Error", "" + throwable.getMessage());
@@ -124,7 +130,8 @@ public class ApprovalListAdapter extends ArrayAdapter<String> {
 
     private void onLoginSuccess() {
 
-        Toast.makeText(context,"Approved",Toast.LENGTH_SHORT).show();
+        Utility.onSuccessAlert("Approved",context);
+        context.startActivity(new Intent(context,AdminHomeActivity.class));
 
     }
 }

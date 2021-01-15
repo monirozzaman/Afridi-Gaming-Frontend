@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itvillage.afridigaming.R;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.services.UpdateGameResultService;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
@@ -87,7 +88,7 @@ public class AdminGameResultAddAdapter extends ArrayAdapter<String> {
 
         UpdateGameResultService updateGameResultService = new UpdateGameResultService(context);
 
-        Observable<Void> responseObservable = updateGameResultService.updateGameResultService(gameId, userId, squadPrize, numberOfKill);
+        Observable<String> responseObservable = updateGameResultService.updateGameResultService(gameId, userId, squadPrize, numberOfKill);
 
 
         responseObservable.subscribeOn(Schedulers.io())
@@ -111,7 +112,7 @@ public class AdminGameResultAddAdapter extends ArrayAdapter<String> {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 401) {
-                Toast.makeText(context, "Something Wrong", Toast.LENGTH_LONG).show();
+                Utility.onErrorAlert("Something Wrong",context);
 
             }
             Log.e("Error", "" + throwable.getMessage());
@@ -120,7 +121,7 @@ public class AdminGameResultAddAdapter extends ArrayAdapter<String> {
 
     private void onLoginSuccess() {
 
-        Toast.makeText(context, "Updated.", Toast.LENGTH_LONG).show();
+        Utility.onSuccessAlert("Update Successful",context);
 
     }
 }

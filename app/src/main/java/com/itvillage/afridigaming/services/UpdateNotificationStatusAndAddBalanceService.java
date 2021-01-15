@@ -19,7 +19,7 @@ public class UpdateNotificationStatusAndAddBalanceService {
         this.context = context;
     }
 
-    public Observable<Void> updateNotificationStatusAndAddBalanceService(String balanceId,String userId,String balance) {
+    public Observable<String> updateNotificationStatusAndAddBalanceService(String balanceId,String userId,String balance) {
 
         String updateRoomDetailsRequest = String.format(LOGIN_REQUEST_BODY_FORMAT, "true",balance);
 

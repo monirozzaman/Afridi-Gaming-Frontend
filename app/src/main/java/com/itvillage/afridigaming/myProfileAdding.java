@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.dto.response.LoginResponse;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
 import com.itvillage.afridigaming.services.UserCreateService;
@@ -63,16 +64,16 @@ public class myProfileAdding extends AppCompatActivity {
 
         UserCreateService userCreateService = new UserCreateService(this);
 
-        Observable<UserCreateProfileResponse> responseObservable = userCreateService.createUser(fname, lName,mobile);
+        Observable<String> responseObservable = userCreateService.createUser(fname, lName,mobile);
 
         responseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(createUser -> {
 
-                    Log.e("Access Token",String.valueOf(createUser.getFirstName()));
+                    Utility.onSuccessAlert("Successfully Updated",this);
 
                 }, throwable -> {
-
+                    Utility.onErrorAlert("Something Wrong",this);
                 }, () -> {
 
                 });
