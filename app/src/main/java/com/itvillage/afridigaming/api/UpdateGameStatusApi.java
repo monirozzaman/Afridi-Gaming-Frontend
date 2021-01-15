@@ -8,5 +8,5 @@ import retrofit2.http.Path;
 
 public interface UpdateGameStatusApi {
     @PUT("api/auth/admin/change/staus/games/{gameId}")
-    Observable<Void> updateGameStatusApi(@Path("gameId") String gameId,@Body RequestBody body);
+    Observable<String> updateGameStatusApi(@Path("gameId") String gameId,@Body RequestBody body);
 }

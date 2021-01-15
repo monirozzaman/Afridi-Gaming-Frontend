@@ -20,7 +20,7 @@ public class UpdateRoomDetailsService {
         this.context = context;
     }
 
-    public Observable<Void> updateRoomDetailsService(String gameId,String roomId,String roomPassword) {
+    public Observable<String> updateRoomDetailsService(String gameId,String roomId,String roomPassword) {
 
         String updateRoomDetailsRequest = String.format(LOGIN_REQUEST_BODY_FORMAT, roomId,roomPassword);
 

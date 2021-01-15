@@ -10,5 +10,5 @@ import retrofit2.http.PUT;
 
 public interface PostPaymentRequestApi {
     @POST("api/auth/user/balance/add/request")
-    Observable<Void> postPaymentRequest(@Body RequestBody body);
+    Observable<String> postPaymentRequest(@Body RequestBody body);
 }

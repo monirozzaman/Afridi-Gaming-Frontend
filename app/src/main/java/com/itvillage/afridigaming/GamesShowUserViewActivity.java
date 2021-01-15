@@ -9,7 +9,7 @@ import android.widget.ListView;
 import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
-import com.itvillage.afridigaming.services.GetAllGamesService;
+import com.itvillage.afridigaming.services.GetAllActiveGamesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +50,9 @@ public class GamesShowUserViewActivity extends AppCompatActivity {
     }
     @SuppressLint("CheckResult")
     private void setAllGamesInList() {
-        GetAllGamesService getAllGamesService = new GetAllGamesService(getApplicationContext());
+        GetAllActiveGamesService getAllActiveGamesService = new GetAllActiveGamesService(getApplicationContext());
         Observable<List<GameResponse>> listObservable =
-                getAllGamesService.getAllActiveGame();
+                getAllActiveGamesService.getAllActiveGame();
 
         listObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

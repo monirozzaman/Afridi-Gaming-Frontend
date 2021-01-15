@@ -4,19 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.itvillage.afridigaming.adapter.AdminGameListAdapter;
 import com.itvillage.afridigaming.adapter.ApprovalListAdapter;
-import com.itvillage.afridigaming.adapter.GameListAdapter;
-import com.itvillage.afridigaming.dto.response.GameResponse;
-import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.dto.response.RequestedNotificationResponse;
-import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
-import com.itvillage.afridigaming.services.GetAllGamesService;
-import com.itvillage.afridigaming.services.GetUserService;
 import com.itvillage.afridigaming.services.MoneyRequestNotificationService;
 
 import java.util.ArrayList;

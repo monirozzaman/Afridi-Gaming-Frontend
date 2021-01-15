@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.itvillage.afridigaming.R;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
 import com.itvillage.afridigaming.services.UpdateGameSatusService;
 import com.itvillage.afridigaming.services.UpdateRoomDetailsService;
@@ -153,16 +154,14 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
         showAllPlayers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!registerUsersInGameEntityArray.isEmpty())
+                {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 ViewGroup viewGroup = context.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_dialog_for_list_show, viewGroup, false);
 
                 ArrayList<String> playerIdList = new ArrayList<>();
                 ArrayList<String> userNameOfGameList = new ArrayList<>();
-                if(registerUsersInGameEntityArray.isEmpty())
-                {
-                    playerIdList.add("No Registered Player Found!!");
-                }
 
                 for (RegisterUsersInGameEntity registerUsersInGameEntity : registerUsersInGameEntityArray) {
                     playerIdList.add(registerUsersInGameEntity.getUserId());
@@ -177,6 +176,10 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
                 builder.setView(dialogView);
                 AlertDialog alertDialog = builder.create();
                 alertDialog.show();
+                }
+                else {
+                    Toast.makeText(context,"No Player Found",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -228,7 +231,7 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
 
         UpdateRoomDetailsService updateRoomDetailsService = new UpdateRoomDetailsService(context);
 
-        Observable<Void> responseObservable = updateRoomDetailsService.updateRoomDetailsService(gameId, room_id, room_password);
+        Observable<String> responseObservable = updateRoomDetailsService.updateRoomDetailsService(gameId, room_id, room_password);
 
 
         responseObservable.subscribeOn(Schedulers.io())
@@ -251,7 +254,7 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
 
         UpdateGameSatusService updateGameSatusService = new UpdateGameSatusService(context);
 
-        Observable<Void> responseObservable = updateGameSatusService.updateGameSatusService(gameId, status);
+        Observable<String> responseObservable = updateGameSatusService.updateGameSatusService(gameId, status);
 
 
         responseObservable.subscribeOn(Schedulers.io())
@@ -275,16 +278,16 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
             HttpException httpException = (HttpException) throwable;
 
             if (httpException.code() == 500 || httpException.code() == 401) {
-                Toast.makeText(context, "Something Wrong", Toast.LENGTH_LONG).show();
+                Utility.onErrorAlert("Something Wrong",context);
 
             }
-            Log.e("Error", "" + throwable.getMessage());
+
         }
     }
 
     private void onLoginSuccess() {
 
-        Toast.makeText(context, "Updated.", Toast.LENGTH_LONG).show();
+        Utility.onSuccessAlert("Updated",context);
 
     }
 }

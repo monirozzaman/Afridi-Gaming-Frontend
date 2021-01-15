@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.itvillage.afridigaming.config.Utility;
 import com.itvillage.afridigaming.dto.response.UpdatePasswordResponse;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
 import com.itvillage.afridigaming.services.UpdatePasswordService;
@@ -50,14 +51,14 @@ public class PasswordChange extends AppCompatActivity {
 
         UpdatePasswordService updatePasswordService = new UpdatePasswordService(this);
 
-        Observable<UpdatePasswordResponse> responseObservable = updatePasswordService.updatePassword(password);
+        Observable<String> responseObservable = updatePasswordService.updatePassword(password);
 
         responseObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(createUser -> {
-
+                    Utility.onSuccessAlert("Password Updated",this);
                 }, throwable -> {
-
+                    Utility.onErrorAlert("Something Wrong",this);
                 }, () -> {
 
                 });

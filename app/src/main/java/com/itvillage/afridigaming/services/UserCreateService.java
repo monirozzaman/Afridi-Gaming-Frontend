@@ -21,7 +21,7 @@ public class UserCreateService {
         this.context = context;
     }
 
-    public Observable<UserCreateProfileResponse> createUser(String firstName, String lastName,String mobileNo) {
+    public Observable<String> createUser(String firstName, String lastName,String mobileNo) {
 
         String createUserResponse = String.format(LOGIN_REQUEST_BODY_FORMAT, firstName, lastName,mobileNo);
 

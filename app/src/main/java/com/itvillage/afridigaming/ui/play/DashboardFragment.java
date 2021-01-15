@@ -12,11 +12,10 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.itvillage.afridigaming.R;
-import com.itvillage.afridigaming.adapter.GameListAdapter;
 import com.itvillage.afridigaming.adapter.PalyedGameListAdapter;
 import com.itvillage.afridigaming.dto.response.GameResponse;
 import com.itvillage.afridigaming.dto.response.RegisterUsersInGameEntity;
-import com.itvillage.afridigaming.services.GetAllGamesService;
+import com.itvillage.afridigaming.services.GetAllInActiveGamesService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,9 +61,10 @@ public class DashboardFragment extends Fragment {
 
     @SuppressLint("CheckResult")
     private void setAllGamesInList() {
-        GetAllGamesService getAllGamesService = new GetAllGamesService(this.getActivity());
+        GetAllInActiveGamesService getAllInActiveGamesService = new GetAllInActiveGamesService(this.getActivity());
         Observable<List<GameResponse>> listObservable =
-                getAllGamesService.getAllActiveGame();
+                getAllInActiveGamesService.getAllInActiveActiveGame();
+
 
         listObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
