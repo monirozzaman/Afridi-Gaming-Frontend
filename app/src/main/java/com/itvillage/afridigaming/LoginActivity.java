@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.emailEditText);
         password = findViewById(R.id.password);
-
+        sign_in_but.setText("Sign In");
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,10 +58,8 @@ public class LoginActivity extends AppCompatActivity {
         sign_in_but.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
+                sign_in_but.setText("Signing..");
               login(emailEditText.getText().toString(), password.getText().toString());
-
 
 
             }

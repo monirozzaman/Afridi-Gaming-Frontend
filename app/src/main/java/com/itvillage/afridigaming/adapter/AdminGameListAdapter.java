@@ -128,6 +128,12 @@ public class AdminGameListAdapter extends ArrayAdapter<String> {
         roomIdANdPass.setText(roomIdAndPassList.get(position));
 
         gameStatus.setText(String.valueOf(gameIsActiveList.get(position)));
+        if(gameIsActiveList.get(position))
+        {
+            publishOrUn.setText("Unpublished");
+        }else {
+            publishOrUn.setText("published");
+        }
         totalRegistration.setText("" + numberOfPlayer);
 
         prizeDetailsShowBut.setOnClickListener(new View.OnClickListener() {

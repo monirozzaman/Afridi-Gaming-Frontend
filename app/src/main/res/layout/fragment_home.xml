@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="monospace"
                 android:gravity="center"
-                android:text="2 match found"
+                android:text="0 match found"
                 android:textColor="@color/teal_200"
                 android:textSize="12dp"
                 android:textStyle="bold" />
