@@ -63,7 +63,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="bKash"
-            android:checked="true"
+            android:checked="false"
             android:textSize="13dp" />
         <RadioButton
             android:id="@+id/radioSolo"
