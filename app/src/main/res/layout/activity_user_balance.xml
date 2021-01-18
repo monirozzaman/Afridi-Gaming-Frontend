@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:background="@color/base_color"
         android:orientation="vertical"
         tools:ignore="MissingConstraints">
@@ -112,14 +112,22 @@
         <Button
             android:id="@+id/add_money_help_but"
             android:layout_gravity="center"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="How to add money"/>
+        <Button
+            android:id="@+id/withdraw_money_help_but"
+            android:layout_gravity="center"
+            android:backgroundTint="#CD0B0B"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Withdraw Money"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="25dp"
             android:orientation="horizontal">
             <androidx.cardview.widget.CardView

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,8 +21,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.itvillage.afridigaming.BuildConfig;
 import com.itvillage.afridigaming.LoginActivity;
 import com.itvillage.afridigaming.PasswordChange;
+import com.itvillage.afridigaming.PaymentHistoryActivity;
 import com.itvillage.afridigaming.R;
 import com.itvillage.afridigaming.UserBalanceActivity;
+import com.itvillage.afridigaming.WithdrawHistoryActivity;
 import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
 import com.itvillage.afridigaming.myProfileAdding;
 import com.itvillage.afridigaming.services.GetUserService;
@@ -50,6 +53,7 @@ public class MeFragment extends Fragment {
         ConstraintLayout changePassword = view.findViewById(R.id.changePassword);
         ConstraintLayout help = view.findViewById(R.id.help);
         ConstraintLayout share = view.findViewById(R.id.share);
+        ConstraintLayout trns_history = view.findViewById(R.id.trns_history);
 
         userProfileName = view.findViewById(R.id.userProfileName);
         availableBalance = view.findViewById(R.id.availableBalance);
@@ -59,6 +63,34 @@ public class MeFragment extends Fragment {
 
         getUserProfile();
 
+        trns_history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getContext());
+                ViewGroup viewGroup = v.findViewById(android.R.id.content);
+                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_trs_choice_dialog, viewGroup, false);
+
+                Button w_history = dialogView.findViewById(R.id.w_history);
+                Button p_history = dialogView.findViewById(R.id.p_history);
+
+                w_history.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(dialogView.getContext(), WithdrawHistoryActivity.class));
+                    }
+                });
+                p_history.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        startActivity(new Intent(dialogView.getContext(), PaymentHistoryActivity.class));
+                    }
+                });
+
+                builder.setView(dialogView);
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -137,7 +169,7 @@ public class MeFragment extends Fragment {
                     userProfileName.setText(getUserProfile.getFirstName());
                     availableBalance.setText(Double.toString(getUserProfile.getAcBalance()));
                     totalkill.setText(Integer.toString(getUserProfile.getTotalKill()));
-                    totalWins.setText(Double.toString(getUserProfile.getAcBalance()));
+                    totalWins.setText(Double.toString(getUserProfile.getTotalEarn()));
 
                 }, throwable -> {
                     throwable.printStackTrace();
