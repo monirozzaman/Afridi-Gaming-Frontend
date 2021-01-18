@@ -1,11 +1,11 @@
 package com.itvillage.afridigaming;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.itvillage.afridigaming.adapter.ApprovalListAdapter;
 import com.itvillage.afridigaming.dto.response.RequestedNotificationResponse;
@@ -47,21 +47,20 @@ public class MoneyApprovalActivity extends AppCompatActivity {
         moneyRequestNotificationServiceOb.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(res -> {
-                        for(RequestedNotificationResponse requestedNotificationResponse: res)
-                        {
-                            userIdList.add(requestedNotificationResponse.getUserId());
-                            nameList.add(requestedNotificationResponse.getName());
-                            paymentGetwayList.add(requestedNotificationResponse.getPaymentGetawayName());
-                            amountList.add(String.valueOf(requestedNotificationResponse.getAmount()));
-                            balanceIdList.add(String.valueOf(requestedNotificationResponse.getId()));
-                            mobileLastDigit.add(String.valueOf(requestedNotificationResponse.getLastThreeDigitOfPayableMobileNo()));
+                    for (RequestedNotificationResponse requestedNotificationResponse : res) {
+                        userIdList.add(requestedNotificationResponse.getUserId());
+                        nameList.add(requestedNotificationResponse.getName());
+                        paymentGetwayList.add(requestedNotificationResponse.getPaymentGetawayName());
+                        amountList.add(String.valueOf(requestedNotificationResponse.getAmount()));
+                        balanceIdList.add(String.valueOf(requestedNotificationResponse.getId()));
+                        mobileLastDigit.add(String.valueOf(requestedNotificationResponse.getLastThreeDigitOfPayableMobileNo()));
 
 
-                        }
-                    ApprovalListAdapter adapter=new ApprovalListAdapter(this,userIdList,nameList,paymentGetwayList,amountList,mobileLastDigit, balanceIdList );
-                    list=(ListView)findViewById(R.id.approval_list);
+                    }
+                    ApprovalListAdapter adapter = new ApprovalListAdapter(this, userIdList, nameList, paymentGetwayList, amountList, mobileLastDigit, balanceIdList);
+                    list = (ListView) findViewById(R.id.approval_list);
                     list.setAdapter(adapter);
-                },err -> {
+                }, err -> {
 
                 });
     }

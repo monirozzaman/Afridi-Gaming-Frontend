@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.itvillage.afridigaming.dto.response.UserCreateProfileResponse;
 import com.itvillage.afridigaming.services.GetUserService;
 import com.itvillage.afridigaming.services.LoginService;
 import com.itvillage.afridigaming.services.PostMoneyRequestService;
+import com.itvillage.afridigaming.services.WithdrawMoneyRequestService;
 import com.jakewharton.retrofit2.adapter.rxjava2.HttpException;
 
 import java.util.ArrayList;
@@ -38,8 +42,9 @@ import io.reactivex.schedulers.Schedulers;
 public class UserBalanceActivity extends AppCompatActivity {
 
     TextView amount,amountD,winning_amount;
-    Button add_money_help_but;
+    Button add_money_help_but,withdraw_money_help_but;
     CardView bkash_but,rocket_but;
+    String payAcType;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +52,9 @@ public class UserBalanceActivity extends AppCompatActivity {
 
         amount = findViewById(R.id.amount);
         amountD = findViewById(R.id.amountD);
+        withdraw_money_help_but = findViewById(R.id.withdraw_money_help_but);
         winning_amount = findViewById(R.id.winning_amount);
+
         getUserProfile();
 
         add_money_help_but = findViewById(R.id.add_money_help_but);
@@ -79,8 +86,58 @@ public class UserBalanceActivity extends AppCompatActivity {
                 moneyAddRequest("rocket");
             }
         });
+        withdraw_money_help_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_form_withdraw_money_details, viewGroup, false);
+                builder.setView(dialogView);
+
+                EditText amount_no_withdraw = dialogView.findViewById(R.id.amount_no_withdraw);
+                EditText amount_withdraw = dialogView.findViewById(R.id.amount_withdraw);
+                Button withdraw_but = dialogView.findViewById(R.id.withdraw_but);
+                RadioGroup rg = (RadioGroup) dialogView.findViewById(R.id.paymentTypeGroup);
+                rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                    public void onCheckedChanged(RadioGroup group, int checkedId) {
+                        payAcType = ((RadioButton)dialogView.findViewById(checkedId)).getText().toString();
+                        Toast.makeText(getBaseContext(),  payAcType+" Selected", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                withdraw_but.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        withdrawMoney(payAcType,amount_withdraw.getText().toString(),amount_no_withdraw.getText().toString());
+                        alertDialog.dismiss();
+                    }
+                });
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            }
+        });
     }
 
+
+    @SuppressLint("CheckResult")
+    private void withdrawMoney(String transactionMethod, String loadBalAmount, String acNo) {
+
+        WithdrawMoneyRequestService withdrawMoneyRequestService = new WithdrawMoneyRequestService(this);
+
+        Observable<String> responseObservable = withdrawMoneyRequestService.withdrawMoneyRequestApi(transactionMethod,loadBalAmount,acNo);
+
+
+        responseObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(res -> {
+
+                    Utility.onSuccessAlert("Withdraw Request Send",this);
+
+                }, throwable -> {
+                    Utility.onErrorAlert("Withdraw Request Failed",this);
+                }, () -> {
+
+                });
+
+    }
     private void moneyAddRequest(String by) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         ViewGroup viewGroup = findViewById(android.R.id.content);
