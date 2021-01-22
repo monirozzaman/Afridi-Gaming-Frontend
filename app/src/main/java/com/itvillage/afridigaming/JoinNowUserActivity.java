@@ -141,11 +141,13 @@ public class JoinNowUserActivity extends AppCompatActivity {
         if (throwable instanceof HttpException) {
             HttpException httpException = (HttpException) throwable;
 
-            if (httpException.code() == 500 || httpException.code() == 403) {
+            if (httpException.code() == 404) {
                 Utility.onErrorAlert("Already Registered",this);
 
-            }else {
+            }else if(httpException.code() == 500){
                 Utility.onErrorAlert("Inefficient Balance",this);
+            }else {
+                Utility.onErrorAlert("Something Wrong",this);
             }
 
         }

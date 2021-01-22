@@ -5,16 +5,60 @@
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#F6F6DB"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:id="@+id/serial_no"
+                    android:layout_width="60dp"
+                    android:text="1"
+                    android:background="@color/base_color"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="30dp"
+
+                    android:layout_height="60dp"
+                    android:padding="5dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/player_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
+                        android:padding="2dp"
+                        android:fontFamily="serif-monospace"
+                        android:text="Player Id"
+
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="#290101"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/sub_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="TextView" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,22 +71,23 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:padding="2dp"
-                        android:text="Payment Way"
+
+                        android:text="Total Kill"
                         android:textAllCaps="true"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="#4d4d4d"
+                        android:textColor="#F87F7F"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/payment_way"
-                        android:layout_width="130dp"
+                        android:id="@+id/total_kille"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
@@ -57,22 +102,22 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="130dp"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
                         android:padding="2dp"
-                        android:text="Amount "
+                        android:text="Total Earn"
                         android:textAllCaps="true"
                         android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="#4d4d4d"
+                        android:textColor="#EF2121"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/amt_text"
-                        android:layout_width="130dp"
+                        android:id="@+id/total_earne"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:gravity="center"
@@ -83,63 +128,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="5dp"
-                        android:gravity="center"
-                        android:padding="2dp"
-                        android:text="Last 4 Digit"
-                        android:textAllCaps="true"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="#4d4d4d"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/last_three_digit"
-                        android:layout_width="130dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:text="20"
-                        android:textColor="@color/black" />
-                </LinearLayout>
+                    android:orientation="vertical"/>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="Requested By: Game Id" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="5dp"
-                android:gravity="end"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/deny"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:visibility="invisible"
-                    android:backgroundTint="#E40B0B"
-                    android:text="Deny" />
-
-                <Button
-                    android:id="@+id/approve"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Approve" />
-            </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

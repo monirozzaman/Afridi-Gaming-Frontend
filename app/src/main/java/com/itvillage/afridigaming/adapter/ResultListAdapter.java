@@ -81,15 +81,26 @@ public class ResultListAdapter extends ArrayAdapter<String> {
                 ViewGroup viewGroup = context.findViewById(android.R.id.content);
                 View dialogView = LayoutInflater.from(v.getContext()).inflate(R.layout.custom_dialog_for_list_show, viewGroup, false);
 
-                ArrayList<String> playerName = new ArrayList<>();
-                for(RegisterUsersInGameEntity registerUsersInGameEntity : registerUsersInGameEntityArray)
-                {
-                    playerName.add(registerUsersInGameEntity.getPartnerOneName()+","+registerUsersInGameEntity.getPartnerTwoName()+","+registerUsersInGameEntity.getPartnerThreeName());
+                ArrayList<String> totalKillArray = new ArrayList<>();
+                ArrayList<String> totalEarnArray = new ArrayList<>();
+                ArrayList<String> partnerTypeArray = new ArrayList<>();
+                ArrayList<String> partnerOneNameArray = new ArrayList<>();
+                ArrayList<String> partnerTwoNameArray = new ArrayList<>();
+                ArrayList<String> partnerThreeNameArray = new ArrayList<>();
+
+
+                for (RegisterUsersInGameEntity registerUsersInGameEntity : registerUsersInGameEntityArray) {
+                    totalKillArray.add(String.valueOf(registerUsersInGameEntity.getTotalKill()));
+                    totalEarnArray.add(String.valueOf(registerUsersInGameEntity.getTotalEarn()));
+                    partnerTypeArray.add(registerUsersInGameEntity.getPartnerType());
+                    partnerOneNameArray.add(String.valueOf(registerUsersInGameEntity.getPartnerOneName()));
+                    partnerTwoNameArray.add(registerUsersInGameEntity.getPartnerTwoName());
+                    partnerThreeNameArray.add(registerUsersInGameEntity.getPartnerThreeName());
                 }
 
-                ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(dialogView.getContext(),android.R.layout.simple_list_item_1, playerName);
+                GameResultListAdapter adapter = new GameResultListAdapter(context,totalKillArray,totalEarnArray,partnerTypeArray,partnerOneNameArray,partnerTwoNameArray,partnerThreeNameArray);
                 ListView playerList =  dialogView.findViewById(R.id.playerList);
-                playerList.setAdapter(arrayAdapter);
+                playerList.setAdapter(adapter);
 
 
                 builder.setView(dialogView);

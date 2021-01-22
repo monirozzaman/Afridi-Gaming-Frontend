@@ -9,6 +9,6 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 
 public interface GetWithdrawListApi {
-    @GET("api/auth/admin/show/withdraw/request/active")
+    @GET("api/auth/get/withdraw/request/byUsers")
     Observable<List<WithDrawMoneyResponse>> getWithdrawList();
 }

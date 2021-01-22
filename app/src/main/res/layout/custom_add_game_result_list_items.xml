@@ -99,7 +99,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="None"
-                    android:checked="true"
                     android:textSize="13dp" />
                 <RadioButton
                     android:id="@+id/radioSolo"
